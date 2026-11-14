@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ee">
+  <meta name="description" content="The personal portfolio of Joshua Bustamante.">
+  <title>Joshua Bustamante | Portfolio</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f6f0;
+      --ink: #172a27;
+      --muted: #5e6f69;
+      --green: #245b4a;
+      --green-dark: #193f35;
+      --coral: #df765e;
+      --line: #d7ded7;
+      --white: #fffefa;
+      --serif: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      --sans: Aptos, "Segoe UI", "Trebuchet MS", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    .skip-link {
+      position: absolute;
+      top: -4rem;
+      left: 1rem;
+      z-index: 20;
+      padding: .65rem 1rem;
+      background: var(--ink);
+      color: white;
+    }
+    .skip-link:focus { top: 1rem; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(23, 42, 39, .1);
+      background: rgba(246, 246, 240, .96);
+      backdrop-filter: blur(12px);
+    }
+    .nav-wrap {
+      width: min(1160px, calc(100% - 3rem));
+      min-height: 76px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .brand {
+      color: var(--green-dark);
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a {
+      color: var(--muted);
+      font-size: .9rem;
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--coral); }
+    .nav-links .nav-contact {
+      padding: .65rem 1rem;
+      border: 1px solid var(--green);
+      color: var(--green-dark);
+    }
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--ink);
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+    .container { width: min(1160px, calc(100% - 3rem)); margin: 0 auto; }
+    .hero {
+      position: relative;
+      isolation: isolate;
+      min-height: min(780px, calc(100svh - 76px));
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: clamp(3rem, 8vw, 7rem);
+      padding-top: 4.5rem;
+      padding-bottom: 5rem;
+    }
+    .hero::before {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        repeating-linear-gradient(90deg, transparent 0 78px, rgba(36, 91, 74, .045) 78px 79px, transparent 79px 80px),
+        repeating-linear-gradient(0deg, transparent 0 78px, rgba(36, 91, 74, .035) 78px 79px, transparent 79px 80px);
+      background-size: 80px 80px;
+      animation: grid-drift 36s linear infinite;
+      content: "";
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      margin: 0 0 1.2rem;
+      color: var(--green);
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      width: 25px;
+      height: 2px;
+      background: var(--coral);
+      content: "";
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2 { font-family: var(--serif); font-weight: 500; letter-spacing: 0; }
+    h1 {
+      max-width: 650px;
+      margin-bottom: 1.2rem;
+      font-size: clamp(3rem, 6vw, 5.8rem);
+      line-height: 1.02;
+    }
+    h1 span { color: var(--green); font-style: italic; }
+    .hero-copy > p:not(.eyebrow) { max-width: 520px; color: var(--muted); font-size: 1.1rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2rem; }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem 1.5rem;
+      margin-top: 2.4rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      color: var(--green-dark);
+      font-size: .85rem;
+      font-weight: 700;
+    }
+    @keyframes rise-in {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes headline-reveal {
+      from { opacity: 0; transform: translateY(30px); clip-path: inset(0 0 28% 0); }
+      to { opacity: 1; transform: translateY(0); clip-path: inset(0); }
+    }
+    @keyframes grid-drift {
+      to { background-position: 80px 80px; }
+    }
+    @keyframes photo-in {
+      from { opacity: 0; transform: translateY(24px) rotate(6deg) scale(.96); }
+      to { opacity: 1; transform: translateY(0) rotate(2deg) scale(1); }
+    }
+    .hero-copy .eyebrow { animation: rise-in .65s .05s both; }
+    #hero-title { animation: headline-reveal .9s .15s cubic-bezier(.2, .75, .25, 1) both; }
+    .hero-copy > p:not(.eyebrow) { animation: rise-in .7s .32s both; }
+    .hero-actions { animation: rise-in .7s .48s both; }
+    .hero-meta { animation: rise-in .7s .62s both; }
+    .portrait-wrap { animation: photo-in .9s .15s both; }
+    .motion-ready [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .motion-ready [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+    .skills-grid [data-reveal]:nth-child(2) { transition-delay: .08s; }
+    .skills-grid [data-reveal]:nth-child(3) { transition-delay: .16s; }
+    .skills-grid [data-reveal]:nth-child(4) { transition-delay: .24s; }
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: .7rem 1.2rem;
+      border: 1px solid var(--green);
+      background: var(--green);
+      color: white;
+      font-size: .9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); background: var(--green-dark); }
+    .button-secondary { background: transparent; color: var(--green-dark); }
+    .button-secondary:hover { color: white; }
+    .portrait-wrap {
+      position: relative;
+      width: min(100%, 430px);
+      justify-self: end;
+      padding-top: .5rem;
+      transform: rotate(2deg);
+    }
+    .portrait-wrap::before {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      z-index: -1;
+      width: min(100%, 380px);
+      aspect-ratio: 1;
+      border: 1px solid var(--coral);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      content: "";
+    }
+    .portrait {
+      width: min(100%, 360px);
+      height: auto;
+      aspect-ratio: 1;
+      margin: 0 auto;
+      border: 8px solid #e8ede4;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 35%;
+      filter: saturate(.82);
+      background: #d7dfd5;
+    }
+    .photo-caption {
+      position: relative;
+      margin-top: .8rem;
+      color: var(--green-dark);
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-style: italic;
+      text-align: center;
+    }
+    .section { padding: 7rem 0; }
+    .section-heading { max-width: 680px; margin-bottom: 3rem; }
+    .section-heading h2 { margin-bottom: .7rem; font-size: clamp(2.4rem, 4vw, 3.6rem); line-height: 1.1; }
+    .section-heading p { max-width: 580px; margin-bottom: 0; color: var(--muted); }
+    .about-section { border-top: 1px solid var(--line); background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: .7fr 1.3fr; gap: 5rem; align-items: start; }
+    .about-note {
+      padding: 1.3rem 0 1.3rem 1.5rem;
+      border-left: 3px solid var(--coral);
+      color: var(--green-dark);
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      line-height: 1.4;
+    }
+    .about-copy p { max-width: 680px; margin-bottom: 1rem; color: var(--muted); line-height: 1.8; }
+    .skills-section { background: #e8ede4; }
+    .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; }
+    .skill-item {
+      min-height: 175px;
+      padding: 1.35rem;
+      border: 1px solid #d1dbd1;
+      border-radius: 4px;
+      background: rgba(255, 254, 250, .72);
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .skill-item:hover { transform: translateY(-4px); border-color: var(--green); background: var(--white); }
+    .skill-number { display: block; margin-bottom: 1.5rem; color: var(--coral); font-size: .8rem; font-weight: 700; }
+    .skill-item h3 { margin-bottom: .35rem; font-family: var(--serif); font-size: 1.35rem; font-weight: 500; }
+    .skill-item p { margin: 0; color: var(--muted); font-size: .88rem; }
+    .contact-section { background: var(--green-dark); color: var(--white); }
+    .contact-section .eyebrow { color: #b9d1c2; }
+    .contact-section .section-heading h2 { max-width: 680px; }
+    .contact-section .section-heading p { color: #d0ddd4; }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,.25);
+    }
+    .contact-row p { margin: 0; color: #d0ddd4; }
+    .contact-email { color: white; font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 2rem); overflow-wrap: anywhere; text-decoration-color: var(--coral); text-underline-offset: .35rem; }
+    .contact-row .button { flex: 0 0 auto; border-color: #b9d1c2; background: transparent; }
+    .contact-row .button:hover { background: var(--green); }
+    footer { padding: 1.5rem 0; background: #19352e; color: #c4d2c8; font-size: .8rem; }
+    .footer-wrap { display: flex; justify-content: space-between; gap: 1rem; }
+    footer p { margin: 0; }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 4px; }
+    @media (max-width: 760px) {
+      .nav-wrap, .container { width: min(100% - 2rem, 680px); }
+      .nav-wrap { min-height: 68px; }
+      .menu-toggle { display: inline-grid; place-items: center; }
+      .nav-links {
+        position: absolute;
+        top: 68px;
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        gap: 0;
+        padding: .5rem 1rem 1rem;
+        border-bottom: 1px solid var(--line);
+        background: var(--paper);
+      }
+      .nav-links.is-open { display: flex; flex-direction: column; }
+      .nav-links a { padding: .8rem .35rem; }
+      .nav-links .nav-contact { margin-top: .35rem; text-align: center; }
+      .hero { min-height: auto; grid-template-columns: 1fr; gap: 3rem; padding-top: 4rem; padding-bottom: 4.5rem; }
+      .hero-copy { min-width: 0; }
+      h1 { font-size: 3rem; overflow-wrap: anywhere; }
+      .hero-meta { margin-top: 1.8rem; }
+      .portrait-wrap { width: min(82%, 390px); justify-self: center; }
+      .section { padding: 4.5rem 0; }
+      .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .skill-item { min-height: 160px; padding: 1.1rem; }
+      .contact-row { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 360px) {
+      h1 { font-size: 2.6rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero::before { animation: none; }
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="#home" aria-label="Joshua Bustamante, home">JB.</a>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">&#9776;</button>
+      <nav class="nav-links" id="primary-nav" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a class="nav-contact" href="#contacts">Contacts</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero container" id="home" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Student portfolio</p>
+        <h1 id="hero-title">Hi, I'm <span>Joshua Bustamante.</span></h1>
+        <p>I'm a hardworking fourth-year student at UM Digos College, learning and building skills for the future.</p>
+        <div class="hero-actions">
+          <a class="button" href="#about">Get to know me</a>
+          <a class="button button-secondary" href="#contacts">Let's connect</a>
+          <a class="button button-secondary" href="resume.pdf">View Resume PDF</a>
+        </div>
+        <div class="hero-meta" aria-label="Education">
+          <span>Fourth-year student</span>
+          <span>UM Digos College</span>
+        </div>
+      </div>
+      <figure class="portrait-wrap">
+        <img class="portrait" src="joshua.jpg" alt="Portrait of Joshua Bustamante wearing a yellow shirt" width="1024" height="1024">
+        <figcaption class="photo-caption">A little about me</figcaption>
+      </figure>
+    </section>
+
+    <section class="section about-section" id="about" aria-labelledby="about-title">
+      <div class="container about-grid">
+        <div>
+          <p class="eyebrow">About</p>
+          <div class="about-note" data-reveal>“Curious by nature, always ready to learn something new.”</div>
+        </div>
+        <div class="about-copy" data-reveal>
+          <div class="section-heading">
+            <h2 id="about-title">Get to know me.</h2>
+            <p>I am a fourth-year college student at UM Digos College.</p>
+          </div>
+          <p>I am a hardworking student who takes my studies seriously.</p>
+          <p>I do my best to complete my schoolwork and meet my responsibilities.</p>
+          <p>I enjoy learning new things and finding ways to improve my skills.</p>
+          <p>I am committed to doing my best as I work toward my future goals.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section skills-section" id="skills" aria-labelledby="skills-title">
+      <div class="container">
+        <div class="section-heading" data-reveal>
+          <p class="eyebrow">Skills</p>
+          <h2 id="skills-title">Skills I bring to the table.</h2>
+          <p>Update this list to reflect the skills and tools you actually use.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-item" data-reveal><span class="skill-number">01</span><h3>Web Design</h3><p>Clean, approachable layouts</p></article>
+          <article class="skill-item" data-reveal><span class="skill-number">02</span><h3>HTML &amp; CSS</h3><p>Responsive web pages</p></article>
+          <article class="skill-item" data-reveal><span class="skill-number">03</span><h3>Communication</h3><p>Clear, thoughtful collaboration</p></article>
+          <article class="skill-item" data-reveal><span class="skill-number">04</span><h3>Problem Solving</h3><p>Careful and creative thinking</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contacts" aria-labelledby="contacts-title">
+      <div class="container">
+        <div class="section-heading" data-reveal>
+          <p class="eyebrow">Contacts</p>
+          <h2 id="contacts-title">Have an idea? Let's talk.</h2>
+          <p>I'm open to new opportunities, projects, and good conversations.</p>
+        </div>
+        <div class="contact-row" data-reveal>
+          <div>
+            <p>Email me at</p>
+            <a class="contact-email" href="mailto:joshuabustamante39@gmail.com">joshuabustamante39@gmail.com</a>
+          </div>
+          <a class="button" href="mailto:joshuabustamante39@gmail.com">Send me an email <span aria-hidden="true">&#8599;</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <p>&copy; <span id="year"></span> Joshua Bustamante</p>
+      <p>Made with care.</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const navigation = document.querySelector('#primary-nav');
+
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
+      navigation.classList.toggle('is-open', !isOpen);
+    });
+
+    navigation.addEventListener('click', (event) => {
+      if (event.target instanceof HTMLAnchorElement) {
+        navigation.classList.remove('is-open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Open menu');
+      }
+    });
+
+    document.querySelector('#year').textContent = new Date().getFullYear();
+
+    const revealItems = document.querySelectorAll('[data-reveal]');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if ('IntersectionObserver' in window && !reduceMotion) {
+      document.body.classList.add('motion-ready');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      revealItems.forEach((item) => revealObserver.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add('is-visible'));
+    }
+  </script>
+</body>
+</html>

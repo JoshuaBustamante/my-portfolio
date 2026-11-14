@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f6f0">
+  <meta name="description" content="Resume of Joshua C. Bustamante, Information Technology student at UM Digos College.">
+  <title>Joshua C. Bustamante | Resume</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f6f0;
+      --ink: #172a27;
+      --muted: #5e6f69;
+      --green: #245b4a;
+      --green-dark: #193f35;
+      --coral: #df765e;
+      --line: #d7ded7;
+      --white: #fffefa;
+      --serif: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      --sans: Aptos, "Segoe UI", "Trebuchet MS", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    .toolbar {
+      display: flex;
+      width: min(900px, calc(100% - 2rem));
+      justify-content: space-between;
+      align-items: center;
+      margin: 1.25rem auto;
+    }
+    .back-link { color: var(--green-dark); font-size: .9rem; font-weight: 700; text-decoration: none; }
+    .print-button {
+      min-height: 42px;
+      padding: .55rem 1rem;
+      border: 0;
+      background: var(--green);
+      color: white;
+      font: inherit;
+      font-size: .9rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .resume {
+      width: min(900px, calc(100% - 2rem));
+      margin: 0 auto 2rem;
+      padding: clamp(2rem, 6vw, 4.5rem);
+      border-top: 6px solid var(--green);
+      background: var(--white);
+      box-shadow: 0 16px 48px rgba(23, 42, 39, .09);
+    }
+    .resume-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .resume-header-side { display: flex; align-items: flex-start; gap: 1rem; }
+    .resume-photo {
+      width: 120px;
+      height: 120px;
+      border: 1px solid var(--line);
+      object-fit: cover;
+      object-position: center 28%;
+    }
+    .eyebrow {
+      margin: 0 0 .45rem;
+      color: var(--green);
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { letter-spacing: 0; }
+    h1 {
+      margin-bottom: .15rem;
+      color: var(--green-dark);
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 6vw, 3.5rem);
+      font-weight: 500;
+      line-height: 1.1;
+    }
+    .role { margin: .4rem 0 0; color: var(--muted); font-size: 1rem; }
+    .contact-list {
+      display: grid;
+      gap: .3rem;
+      margin: .45rem 0 0;
+      padding: 0;
+      color: var(--muted);
+      font-size: .86rem;
+      list-style: none;
+      text-align: right;
+    }
+    .contact-list a { text-decoration-color: var(--coral); text-underline-offset: .15rem; }
+    .resume-section { padding-top: 1.45rem; }
+    .resume-section h2 {
+      margin-bottom: .7rem;
+      color: var(--green);
+      font-size: .8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .summary { max-width: 720px; margin-bottom: 0; color: var(--muted); }
+    .entry { display: flex; justify-content: space-between; gap: 1.5rem; }
+    .entry + .entry { margin-top: 1rem; }
+    .entry h3 { margin-bottom: .15rem; font-size: 1rem; font-weight: 700; }
+    .entry p { margin-bottom: .25rem; color: var(--muted); }
+    .entry-date { flex: 0 0 auto; color: var(--muted); font-size: .85rem; text-align: right; }
+    .skill-list { display: flex; flex-wrap: wrap; gap: .45rem; margin: 0; padding: 0; list-style: none; }
+    .skill-list li { padding: .35rem .65rem; border: 1px solid var(--line); color: var(--green-dark); font-size: .85rem; }
+    .placeholder { color: #a14d37; font-weight: 700; }
+    @media (max-width: 620px) {
+      .resume-header { flex-direction: column; gap: 1rem; }
+      .resume-header-side { width: 100%; justify-content: space-between; gap: .75rem; }
+      .resume-photo { width: 96px; height: 96px; flex: 0 0 96px; }
+      .contact-list { text-align: left; }
+      .entry { flex-direction: column; gap: .2rem; }
+      .entry-date { text-align: left; }
+    }
+    @media print {
+      @page { size: A4; margin: 15mm; }
+      body { background: white; font-size: 10.5pt; }
+      .toolbar { display: none; }
+      .resume { width: auto; margin: 0; padding: 0; border-top-width: 4px; box-shadow: none; }
+      .resume-section { break-inside: avoid; }
+      a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <a class="back-link" href="index.html">&larr; Back to portfolio</a>
+    <button class="print-button" type="button" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+
+  <main class="resume">
+    <header class="resume-header">
+      <div>
+        <p class="eyebrow">Information Technology</p>
+        <h1>JOSHUA C. BUSTAMANTE</h1>
+        <p class="role">Bachelor of Science in Information Technology Student</p>
+      </div>
+      <div class="resume-header-side">
+        <ul class="contact-list" aria-label="Contact information">
+          <li>Aurora Extension, San Miguel</li>
+          <li>Digos City, Davao del Sur</li>
+          <li><a href="mailto:joshuabustamante39@gmail.com">joshuabustamante39@gmail.com</a></li>
+          <li><a href="tel:+639913079702">0991-307-9702</a></li>
+        </ul>
+        <img class="resume-photo" src="resume-photo.png" alt="Formal 2x2 portrait of Joshua C. Bustamante" width="120" height="120">
+      </div>
+    </header>
+
+    <section class="resume-section" aria-labelledby="summary-title">
+      <h2 id="summary-title">Profile</h2>
+      <p class="summary">A dedicated and hardworking Information Technology student with a strong willingness to learn and develop new skills. Knowledgeable in basic computer operations, programming, and troubleshooting. Adaptable, responsible, and eager to gain new knowledge while contributing positively to company goals.</p>
+    </section>
+
+    <section class="resume-section" aria-labelledby="education-title">
+      <h2 id="education-title">Education</h2>
+      <div class="entry">
+        <div>
+          <h3>UM Digos College</h3>
+          <p>Bachelor of Science in Information Technology</p>
+        </div>
+        <div class="entry-date">S.Y. 2023–Present<br>Digos City, Philippines</div>
+      </div>
+      <div class="entry">
+        <div>
+          <h3>Digos Institute of Technical Education and Driving School</h3>
+          <p>Senior High School</p>
+        </div>
+        <div class="entry-date">S.Y. 2019–2021</div>
+      </div>
+      <div class="entry">
+        <div>
+          <h3>Digos City National High School</h3>
+          <p>Junior High School</p>
+        </div>
+        <div class="entry-date">2014–2019</div>
+      </div>
+      <div class="entry">
+        <div>
+          <h3>San Miguel Elementary School</h3>
+          <p>Digos City</p>
+        </div>
+        <div class="entry-date">2008–2014</div>
+      </div>
+    </section>
+
+    <section class="resume-section" aria-labelledby="skills-title">
+      <h2 id="skills-title">Skills</h2>
+      <ul class="skill-list">
+        <li>Basic Programming</li>
+        <li>Basic HTML &amp; CSS</li>
+        <li>Computer Hardware &amp; Software</li>
+        <li>Basic Networking</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
